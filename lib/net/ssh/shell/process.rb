@@ -41,8 +41,7 @@ module Net; module SSH; class Shell
 
           callback.call(self) if callback
 
-          cmd = "(#{command})" if command !~ /^\(.*\)$/
-          cmd << " 0<&-"
+          cmd = command.dup
           cmd << ";" if cmd !~ /[;&]$/
           cmd << " DONTEVERUSETHIS=$?; echo #{manager.separator} $DONTEVERUSETHIS; echo \"exit $DONTEVERUSETHIS\"|sh"
 
